@@ -23,6 +23,7 @@ class getPrediction(generics.RetrieveUpdateDestroyAPIView):
     def get(self, request):
 
         inputImage = "papapaapapap"
+        print(request)
         dataToSend = mxNetModel(inputImage)
         return JsonResponse(
             dataToSend,
