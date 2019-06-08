@@ -11,7 +11,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-from poseApiServer.modelServable import mxNetModel
+from nltkServer.modelServable import classifyComments
 
 class getPrediction(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
@@ -21,7 +21,7 @@ class getPrediction(generics.RetrieveUpdateDestroyAPIView):
 
         inputImage = "papapaapapap"
         print(request)
-        dataToSend = mxNetModel(inputImage)
+        dataToSend = classifyComments(inputImage)
         return JsonResponse(
             dataToSend,
             safe=False,content_type='application/json')

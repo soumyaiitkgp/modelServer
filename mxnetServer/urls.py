@@ -19,5 +19,6 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pose/', include('poseApiServer.urls')),
+    path('model/', include('poseApiServer.urls')),
+    path('model/nltk/', include('nltkServer.urls')),
 ]
