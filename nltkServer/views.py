@@ -11,17 +11,43 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-from nltkServer.modelServable import classifyComments
+from nltkServer.commentClassification import classifyComments
 
 class getPrediction(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
-    print("asdasdas")
-    def get(self, request):
+    def post(self, request):
+        print("bodyyy",request.data)
 
-        inputImage = "papapaapapap"
-        print(request)
-        dataToSend = classifyComments(inputImage)
+        inputImage = [
+         "qqwsqw",
+         "None",
+         "1.plant closed",
+         "2.tea time",
+         "3.dinner time",
+         "1.plant closed",
+         "2.dinner time",
+         "PLAN NOT UPDATE FOR 28.05.2019",
+         "1.manpower shifted to another line.",
+         "2.tool problem",
+         "1. plant closed",
+         "2.dinner time",
+         "1.plant closed",
+         "2.tea time",
+         "1.plant closed",
+         "2.lunch time",
+         "3.tea time",
+         "4.dinner time",
+         "1.plant closed",
+         "2.lunch time",
+         "3.dinner time",
+         "1.plant closed",
+         "2.lunch time",
+         "3.dinner time",
+         "1.plant closed"
+        ]
+
+        dataToSend = classifyComments(request.data)
         return JsonResponse(
             dataToSend,
             safe=False,content_type='application/json')
