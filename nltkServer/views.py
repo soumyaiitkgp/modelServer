@@ -17,37 +17,15 @@ class getPrediction(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
     def post(self, request):
-        print("bodyyy",request.data)
+        # print("bodyyy",request.data)
+        dataRcvd = request.data
+        dataToSend = []
 
-        inputImage = [
-         "qqwsqw",
-         "None",
-         "1.plant closed",
-         "2.tea time",
-         "3.dinner time",
-         "1.plant closed",
-         "2.dinner time",
-         "PLAN NOT UPDATE FOR 28.05.2019",
-         "1.manpower shifted to another line.",
-         "2.tool problem",
-         "1. plant closed",
-         "2.dinner time",
-         "1.plant closed",
-         "2.tea time",
-         "1.plant closed",
-         "2.lunch time",
-         "3.tea time",
-         "4.dinner time",
-         "1.plant closed",
-         "2.lunch time",
-         "3.dinner time",
-         "1.plant closed",
-         "2.lunch time",
-         "3.dinner time",
-         "1.plant closed"
-        ]
+        for plant in dataRcvd:
+            plant['nlpResults'] = classifyComments(plant['zeroOverAllComments'])
+            dataToSend.append(plant)
 
-        dataToSend = classifyComments(request.data)
+        print(dataToSend)
         return JsonResponse(
             dataToSend,
             safe=False,content_type='application/json')
