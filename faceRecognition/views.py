@@ -11,17 +11,13 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-# from poseApiServer.modelServable import mxNetModel
-
-class getPrediction(generics.RetrieveUpdateDestroyAPIView):
+class getFacePrediction(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
-    def get(self, request):
-
-        inputImage = "papapaapapap"
-        print(request)
-        # dataToSend = mxNetModel(inputImage)
-        dataToSend = "haha"
+    def post(self, request):
+        print("bodyyy",request.data)
+        dataToSend = "hello returned"
+        print(dataToSend)
         return JsonResponse(
             dataToSend,
             safe=False,content_type='application/json')

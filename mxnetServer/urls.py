@@ -19,6 +19,7 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('model/', include('poseApiServer.urls')),
+    path('model/pose', include('poseApiServer.urls')),
     path('model/nltk/', include('nltkServer.urls')),
+    path('model/face/', include('faceRecognition.urls')),
 ]
