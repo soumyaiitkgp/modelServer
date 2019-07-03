@@ -13,15 +13,25 @@ from rest_framework import status
 
 from poseApiServer.modelServable import mxNetModel
 
+sys.path.append("/home/jbmai/AlphaPose-Mxnet")
+from Server_API import PoseAPI
+
+Inp_Q = queue.Queue(1000)
+Out_Q = queue.Queue(1000)
+
+A = PoseAPI(Inp_Q)
+A.run()
+Getter= threading.Thread(target=A.out, args=(Out_Q,))
+
 class getPrediction(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
     print("asdasdas")
     def get(self, request):
-
-        inputImage = "papapaapapap"
-        print(request)
-        dataToSend = mxNetModel(inputImage)
-        return JsonResponse(
-            dataToSend,
-            safe=False,content_type='application/json')
+        if request.method == 'POST':
+            inputImage = request.get();
+            print(request)
+            dataToGet = mxNetModel(inputImage,A)
+            return JsonResponse(
+                dataToGet,
+                safe=False,content_type='application/json')
