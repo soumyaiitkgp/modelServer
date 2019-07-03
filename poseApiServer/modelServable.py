@@ -7,7 +7,6 @@ import cv2
 import threading
 import sys
 
-<<<<<<< HEAD
 # numw = 1
 # workers = []
 # getters = []
@@ -19,47 +18,15 @@ import sys
 #     workers[i].run()
 #     getters[i].start()
 
-def mxNetModel(inputData,A):
+def mxNetModel(inputData,A,Inp_Q,Out_Q):
     A.input(inputData,Inp_Q)
     size = len(Inp_Q)
     outputData = []
     while size > 0:
         if not Out_Q.empty():
             outputData.append(Out_Q.get())
-            size = size - 1;
+            size = size - 1
         else:
-            time.sleep(0.1);
+            time.sleep(0.1)
     return outputData
-=======
-# sys.path.append("/home/jbmai/AlphaPose-Mxnet")
-# from Server_API import PoseAPI
-#
-# Inp_Q = queue.Queue(1000)
-# Out_Q = queue.Queue(1000)
-#
-# # numw = 1
-# # workers = []
-# # getters = []
-# # for i in range(numw):
-# #     workers.append(PoseAPI())
-# # for i in range(numw):
-# #     getters.append(threading.Thread(target=workers[i].out, args=(Out_Q,5) ) )
-# # for i in range(numw):
-# #     workers[i].run()
-# #     getters[i].start()
-# A = PoseAPI(Inp_Q)
-# A.run()
-# Getter= threading.Thread(target=A.out, args=(Out_Q,))
-#
-# def mxNetModel(inputData):
-#     A.input(inputData,Inp_Q)
-#     size = len(Inp_Q)
-#     outputData = []
-#     while size > 0:
-#         if not Out_Q.empty():
-#             outputData.append(Out_Q.get())
-#             size = size - 1;
-#         else:
-#             time.sleep(0.1);
-#     return outputData
->>>>>>> b94f0f93b3a2d8612c25b17bc4d7393f0ed9241c
+

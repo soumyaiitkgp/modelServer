@@ -1,0 +1,16 @@
+migrations/
+*/migrations/
+*/migrations/*
+.vscode/
+*/.vscode/
+*/.vscode/*
+__pycache__/
+*/__pycache__/
+*/__pycache__/*
+*.params
+*/*.params
+*.pyc
+*/*.pyc
+*.pc
+*.pyc
+*.pyo
