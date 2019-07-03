@@ -5,5 +5,6 @@ from poseApiServer.views import *
 app_name = 'poseApiServer'
 
 urlpatterns = [
+    url('getimage/',getimage),
     url(r'pred/', getPrediction.as_view()),
 ]
