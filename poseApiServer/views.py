@@ -11,7 +11,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-from poseApiServer.modelServable import mxNetModel
+# from poseApiServer.modelServable import mxNetModel
 
 sys.path.append("/home/jbmai/AlphaPose-Mxnet")
 from Server_API import PoseAPI
@@ -26,8 +26,8 @@ Getter= threading.Thread(target=A.out, args=(Out_Q,))
 class getPrediction(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
-    print("asdasdas")
     def get(self, request):
+<<<<<<< HEAD
         if request.method == 'POST':
             inputImage = request.get();
             print(request)
@@ -35,3 +35,13 @@ class getPrediction(generics.RetrieveUpdateDestroyAPIView):
             return JsonResponse(
                 dataToGet,
                 safe=False,content_type='application/json')
+=======
+
+        inputImage = "papapaapapap"
+        print(request)
+        # dataToSend = mxNetModel(inputImage)
+        dataToSend = "haha"
+        return JsonResponse(
+            dataToSend,
+            safe=False,content_type='application/json')
+>>>>>>> b94f0f93b3a2d8612c25b17bc4d7393f0ed9241c
