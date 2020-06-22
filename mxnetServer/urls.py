@@ -20,4 +20,6 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('model/image/', include('captureImage.urls')),
+    path('model/autoencoder_mayank/', include('autoencoder_mayank.urls'))
+    # path('model/image/', include('captureImage.urls')),
 ]
