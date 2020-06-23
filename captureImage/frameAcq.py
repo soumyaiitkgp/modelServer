@@ -4,16 +4,16 @@ from datetime import datetime
 from datetime import date
 
 cameraList = [
-    ("rtsp://admin:Sahil12051994%40@192.168.1.64:554/Streaming/Channels/301",'1'),
-    ("rtsp://admin:Sahil12051994%40@192.168.1.64:554/Streaming/Channels/301",'2'),
-    ("rtsp://admin:Sahil12051994%40@192.168.1.64:554/Streaming/Channels/301",'3'),
-    ("rtsp://admin:Sahil12051994%40@192.168.1.64:554/Streaming/Channels/301",'4'),
-    ("rtsp://admin:Sahil12051994%40@192.168.1.64:554/Streaming/Channels/301",'5'),
+    ("rtsp://admin:password%40123@192.1.2.131:554/live/0/MAIN",'1'),
+    ("rtsp://admin:password%40123@192.1.2.132:554/live/0/MAIN",'2'),
+    ("rtsp://admin:password%40123@192.1.2.133:554/live/0/MAIN",'3'),
+    ("rtsp://admin:password%40123@192.1.2.134:554/live/0/MAIN",'4'),
+    ("rtsp://admin:password%40123@192.1.2.7:554/live/0/MAIN",'5')
 ]
 
 today = date.today()
 d1 = today.strftime("%d-%m-%Y")
-qualityProjectPath = "/home/sahil/quality_lockDownBackup/JBMQualityproject"
+qualityProjectPath = "/home/jbmai/qualityProject/JBMQualityproject"
 def acquireFrames(data):
     partId = data['partId']
     setupType = str(data['cameraSetup'])
@@ -23,7 +23,8 @@ def acquireFrames(data):
             videoCaptureObject = cv2.VideoCapture(cam[0])
             result = True
             while(result):
-                ret,frame = videoCaptureObject.read()
+                for x in range(10):
+                    ret,frame = videoCaptureObject.read()
 
                 pathAppend = "/data/qualityFrames/" + d1 + "/" + setupType + "_camera/" + partId + "/" + cam[1] + "/"
                 directory = qualityProjectPath + pathAppend
@@ -36,7 +37,12 @@ def acquireFrames(data):
 
                 cv2.imwrite((directory + fileName),frame)
                 result = False
-                tempImagePaths.append(pathAppend + fileName)
+                tempImagePaths.append({
+                'qualityProjectPath' : qualityProjectPath,
+                'relativePath' : pathAppend + fileName,
+                'path' : pathAppend + fileName,
+                'camera' : cam[1]
+                })
             videoCaptureObject.release()
             cv2.destroyAllWindows()
     print("Captured")
