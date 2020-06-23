@@ -11,6 +11,10 @@ cameraList = [
     ("rtsp://admin:password%40123@192.1.2.7:554/live/0/MAIN",'5')
 ]
 
+videoCaptureObjectArray = []
+for cam in cameraList:
+    videoCaptureObjectArray.append((cv2.VideoCapture(cam[0]),cam[1]))
+
 today = date.today()
 d1 = today.strftime("%d-%m-%Y")
 qualityProjectPath = "/home/jbmai/qualityProject/JBMQualityproject"
@@ -18,9 +22,9 @@ def acquireFrames(data):
     partId = data['partId']
     setupType = str(data['cameraSetup'])
     tempImagePaths = []
-    for cam in cameraList:
+    for cam in videoCaptureObjectArray:
         if cam[1] in data['imagesToAcquire'] :
-            videoCaptureObject = cv2.VideoCapture(cam[0])
+            videoCaptureObject = cam[0]
             result = True
             while(result):
                 for x in range(10):
