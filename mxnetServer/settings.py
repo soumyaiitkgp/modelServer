@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'nltkServer',
     'captureImage',
     'autoencoder_mayank',
+    'isolationForest'
 ]
 
 MIDDLEWARE = [
