@@ -3,11 +3,12 @@ from sklearn.ensemble import IsolationForest
 import pickle
 import cv2
 import numpy as np
+import sklearn
 
 def get_result(path):
-    autoencoder = load_model('C:/Users/mukul singh/Documents/JBM Intern/Server/modelServer/isolationForest/auto_encoder.h5')
-    mms = pickle.load(open('C:/Users/mukul singh/Documents/JBM Intern/Server/modelServer/isolationForest/mms.pkl', 'rb'))
-    forest = pickle.load(open('C:/Users/mukul singh/Documents/JBM Intern/Server/modelServer/isolationForest/forest.pkl', 'rb'))
+    autoencoder = load_model('/home/jbmai/try/modelServer/isolationForest/auto_encoder.h5')
+    mms = pickle.load(open('/home/jbmai/try/modelServer/isolationForest/mms.pkl', 'rb'))
+    forest = pickle.load(open('/home/jbmai/try/modelServer/isolationForest/forest.pkl', 'rb'))
 
     img = cv2.imread(path)
     print(path)

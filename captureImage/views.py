@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 import autoencoder_mayank.test1 as mayank
+import isolationForest.prediction as Mukul
 from captureImage.frameAcq import *
 
 class captureImage(generics.RetrieveUpdateDestroyAPIView):
@@ -29,6 +30,7 @@ class captureImage(generics.RetrieveUpdateDestroyAPIView):
 
                 path = frame['qualityProjectPath']+frame['relativePath']
                 print(path)
+                ###################################
                 img = cv2.imread(path)
                 answer = mayank.input(img)
                 print(answer)
@@ -36,15 +38,23 @@ class captureImage(generics.RetrieveUpdateDestroyAPIView):
                     'ssim' : answer,
                     'okNg' : "NG"
                 }
+                ###################################
+                answer = Mukul.get_result(path)
+                tempFrame['isolationForest'] = {
+                    'ssim' : str(answer[0]),
+                    'okNg' : "NG" if(str(answer[0]) == "-1") else "OK"
+                }
+                ###################################
+
                 tempFrame['status'] = 'NG'
                 dataToSend['framePaths'].append(tempFrame)
             else:
                 tempFrame['status'] = 'NotCalculated'
                 dataToSend['framePaths'].append(tempFrame)
 
-        # dataToSend = {
+        # dataToSend = {array with 1 element ndarray?
         #     "framePaths" : framePaths
-        # }
+        # }use .tolist()its fine now
 
         return JsonResponse(
             dataToSend,

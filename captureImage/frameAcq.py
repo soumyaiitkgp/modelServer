@@ -39,6 +39,7 @@ def acquireFrames(data):
                 if not os.path.exists(directory):
                     os.makedirs(directory)
 
+                print("Wrting Image")
                 cv2.imwrite((directory + fileName),frame)
                 result = False
                 tempImagePaths.append({

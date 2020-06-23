@@ -18,7 +18,7 @@ class predict(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
     def post(self, request):
-        requestData = request.data['img_path']
+        requestData = request.data['path']
         answer = Mukul.get_result(requestData)
         # dataToSend = requestData
         # print("data",requestData)
