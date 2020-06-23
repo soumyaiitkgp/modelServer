@@ -22,9 +22,9 @@ def acquireFrames(data):
     partId = data['partId']
     setupType = str(data['cameraSetup'])
     tempImagePaths = []
-    for cam in videoCaptureObjectArray:
+    for cam in cameraList:
         if cam[1] in data['imagesToAcquire'] :
-            videoCaptureObject = cam[0]
+            videoCaptureObject = cv2.VideoCapture(cam[0])
             result = True
             while(result):
                 for x in range(10):

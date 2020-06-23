@@ -11,6 +11,13 @@ from keras.callbacks import TensorBoard
 from SSIM_PIL import compare_ssim as ssim
 from keras import backend as K
 import tensorflow as tf
+
+
+from keras import backend as k
+
+###################################
+# TensorFlow wizardry
+
 def ssim_loss(y_true, y_pred):
   return tf.reduce_mean(tf.image.ssim(y_true, y_pred, 2.0))
 
@@ -58,14 +65,21 @@ def autoencoderModel(input_shape):
 def get_output(x_test):
     width = 128
     height = 128
-    pixels = width * height * 1 
+    pixels = width * height * 1
     x_test = x_test.astype('float32')/255.
     x_test = np.reshape(x_test, (len(x_test), 128, 128, 1))  # adapt this if using `channels_first` image data format
     # print (x_train.shape)
     print (x_test.shape)
     input_shape = x_test.shape[1:]
+
+
+    import keras
+    gpu_options = tf.GPUOptions(allow_growth=True)
+    sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+    keras.backend.tensorflow_backend.set_session(sess)
     autoencoder = autoencoderModel(input_shape)
-    autoencoder.load_weights('/home/mayank/djangoJBM/model/autoencoder/weights-improvement-500-0.27.hdf5')
+    # Create a session with the above options specified.
+    autoencoder.load_weights('/home/jbmai/try/modelServer/autoencoder_mayank/weights-improvement-500-0.27.hdf5')
     autoencoder.compile(optimizer='adam', loss=ssim_loss, metrics=[ssim_loss,'accuracy'])
     decoded_imgs = autoencoder.predict(x_test)
     # cv2.imwrite("mayank.jpg",decoded_imgs)
@@ -128,16 +142,16 @@ def get_output(x_test):
 # # AutoEncoder does not have to label data
 # x = []
 # for i, f in enumerate(img_files):
-#     img = cv2.imread(f) 
+#     img = cv2.imread(f)
 #     #print(type(img))
-     
+
 #     #if type(img) is list:
 #     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 #           # gray sclae
 #     img = cv2.resize(img,(width, height))
 #     data = np.asarray(img)
 #     x.append(data)
-#     #else : 
+#     #else :
 #        # continue
 #     if i % 10 == 0:
 #         print(i, "\n", data)
@@ -154,7 +168,7 @@ def input(img):
     pixels = width * height * 1  # gray scale
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# x.append(img)     
+# x.append(img)
     img = cv2.resize(img,(width, height))
     data = np.asarray(img)
     x.append(data)

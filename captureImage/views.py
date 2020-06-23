@@ -28,6 +28,7 @@ class captureImage(generics.RetrieveUpdateDestroyAPIView):
             if(frame['camera'] == '4'):
 
                 path = frame['qualityProjectPath']+frame['relativePath']
+                print(path)
                 img = cv2.imread(path)
                 answer = mayank.input(img)
                 print(answer)
@@ -35,8 +36,10 @@ class captureImage(generics.RetrieveUpdateDestroyAPIView):
                     'ssim' : answer,
                     'okNg' : "NG"
                 }
+                tempFrame['status'] = 'NG'
                 dataToSend['framePaths'].append(tempFrame)
             else:
+                tempFrame['status'] = 'NotCalculated'
                 dataToSend['framePaths'].append(tempFrame)
 
         # dataToSend = {
