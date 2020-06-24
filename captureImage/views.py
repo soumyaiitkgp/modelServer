@@ -31,18 +31,26 @@ class captureImage(generics.RetrieveUpdateDestroyAPIView):
                 path = frame['qualityProjectPath']+frame['relativePath']
                 print(path)
                 ###################################
-                img = cv2.imread(path)
-                answer = mayank.input(img)
-                print(answer)
-                tempFrame['autoencoder_mayank'] = {
-                    'ssim' : answer,
-                    'okNg' : "NG"
-                }
+                # img = cv2.imread(path)
+                answer = mayank.input(path)
+                print("-----------------------------------"+str(answer))
+                if float(answer) >= float(6.59):
+
+                    tempFrame['autoencoder_mayank'] = {
+                        'ssim' : answer,
+                        'okNg' : "OK"
+                    }
+                else:
+
+                    tempFrame['autoencoder_mayank'] = {
+                        'ssim' : answer,
+                        'okNg' : "NG"
+                    }
                 ###################################
                 answer = Mukul.get_result(path)
                 tempFrame['isolationForest'] = {
                     'ssim' : str(answer[0]),
-                    'okNg' : "NG" if(str(answer[0]) == "-1") else "OK"
+                    'okNg' : "NG"
                 }
                 ###################################
 
@@ -54,7 +62,7 @@ class captureImage(generics.RetrieveUpdateDestroyAPIView):
 
         # dataToSend = {array with 1 element ndarray?
         #     "framePaths" : framePaths
-        # }use .tolist()its fine now
+        # }use .tolist()its fine nowhahahahaha
 
         return JsonResponse(
             dataToSend,
