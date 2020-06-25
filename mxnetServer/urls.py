@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('model/image/', include('captureImage.urls')),
     path('model/autoencoder_mayank/', include('autoencoder_mayank.urls')),
-    path('model/isolationForest/', include('isolationForest.urls'))
+    path('model/isolationForest/', include('isolationForest.urls')),
+    path('model/Maskrcnn_Soumya/', include('Maskrcnn_Soumya.urls'))
     # path('model/image/', include('captureImage.urls')),
 ]
