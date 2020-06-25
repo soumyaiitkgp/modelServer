@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'captureImage',
     'autoencoder_mayank',
     'isolationForest'
+    'Maskrcnn_Soumya'
 ]
 
 MIDDLEWARE = [
