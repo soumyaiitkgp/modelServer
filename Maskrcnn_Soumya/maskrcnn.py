@@ -54,13 +54,13 @@ config = InferenceConfig()
 
 # ## Create Model and Load Trained Weights
 
-print('Loading weights...')
+#print('Loading weights...')
 # Create model object in inference mode.
 model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
 
 # Load weights trained on MS-COCO
 model.load_weights(DETECTOR_MODEL_PATH, by_name=True)
-print('Weights loaded')
+#print('Weights loaded')
 
 # ## Class Names
 # 
@@ -90,9 +90,10 @@ print('class_names loaded')
 
 # ## Run Object Detection
 def detection(path):
-    IMAGE_DIR = path
-    file_names = next(os.walk(IMAGE_DIR))[2]
-    image = skimage.io.imread(os.path.join(IMAGE_DIR, file_names[0]))
+    IMAGE_PATH = path
+    #file_names = next(os.walk(IMAGE_DIR))[2]
+    #image = skimage.io.imread(os.path.join(IMAGE_DIR, file_names[0]))
+    image = skimage.io.imread(IMAGE_PATH)
     #print(file_names)
     results = model.detect([image],verbose=1)
 
@@ -107,8 +108,8 @@ def detection(path):
         #print('RESULT: The sample is not OK')
         out = 'RESULT: The sample is not OK'
     return out
-print('Running detection on the sample...')
+#print('Running detection on the sample...')
 
-#path  = "D:\\Soumya\\modelServer\\Maskrcnn_Soumya\\images"
+#path  = "D:\\Soumya\\modelServer\\Maskrcnn_Soumya\\images\\01.jpg"
 #detection(path)
 
